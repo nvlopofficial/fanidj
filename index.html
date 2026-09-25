@@ -200,7 +200,12 @@ nav.solid { background: rgba(9,13,28,.97); }
 /* PROYECTOS */
 #proyectos { border-bottom: 1px solid var(--line); }
 .proy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.proy-card { padding: 32px 26px; border: 1px solid var(--line2); transition: border-color .25s; }
+.proy-card { padding: 32px 26px; border: 1px solid var(--line2); transition: border-color .25s; display: flex; flex-direction: column; }
+.proy-link {
+  margin-top: auto; padding-top: 20px; font-size: .72rem; letter-spacing: .15em;
+  color: var(--accent); text-decoration: none; transition: color .2s;
+}
+.proy-link:hover { color: var(--accent2); }
 .proy-card:hover { border-color: var(--accent); }
 .proy-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .05em; color: var(--accent); margin-bottom: 12px; }
 .proy-card p { font-size: .82rem; line-height: 1.7; color: var(--mute); }
@@ -219,12 +224,26 @@ nav.solid { background: rgba(9,13,28,.97); }
 .music-link-icon { font-size: 1.3rem; flex-shrink: 0; }
 .music-link-text strong { display: block; font-size: .85rem; letter-spacing: .06em; font-weight: 500; margin-bottom: 3px; }
 .music-link-text span { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--mute); }
-.youtube-embed {
-  grid-column: 1 / -1; position: relative;
-  padding-bottom: 56.25%; height: 0; border: 1px solid var(--line2);
-}
+.yt-player { grid-column: 1 / -1; display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.yt-title { grid-column: 1 / -1; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); margin-bottom: -8px; }
+.youtube-embed { position: relative; padding-bottom: 56.25%; height: 0; border: 1px solid var(--line2); }
 .youtube-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-@media (max-width: 768px) { .musica-grid { grid-template-columns: 1fr; } }
+.yt-list { position: relative; }
+.yt-scroll { position: absolute; inset: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; scrollbar-width: thin; scrollbar-color: var(--line2) transparent; }
+.yt-item {
+  display: flex; align-items: center; gap: 14px; padding: 8px; flex-shrink: 0;
+  border: 1px solid var(--line2); text-decoration: none; color: var(--fg); transition: all .25s;
+}
+.yt-item:hover { border-color: var(--accent); background: rgba(184,142,224,.06); }
+.yt-item.on { border-color: var(--accent); background: rgba(184,142,224,.10); }
+.yt-item img { width: 112px; aspect-ratio: 16/9; object-fit: cover; flex-shrink: 0; display: block; }
+.yt-item strong { display: block; font-size: .8rem; letter-spacing: .04em; font-weight: 500; margin-bottom: 3px; }
+.yt-item em { font-style: normal; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+@media (max-width: 768px) {
+  .musica-grid { grid-template-columns: 1fr; }
+  .yt-player { grid-template-columns: 1fr; gap: 16px; }
+  .yt-scroll { position: static; }
+}
 
 /* GALERÍA */
 #galeria { border-bottom: 1px solid var(--line); }
@@ -285,6 +304,11 @@ nav.solid { background: rgba(9,13,28,.97); }
   color: var(--accent); text-decoration: none; transition: color .2s;
 }
 .contact-booking a:hover { color: var(--accent2); }
+.contact-booking a.booking-mail {
+  display: block; margin-top: 14px; font-family: 'DM Sans', sans-serif; font-size: .9rem;
+  letter-spacing: .05em; color: var(--mute); word-break: break-all;
+}
+.contact-booking a.booking-mail:hover { color: var(--accent); }
 
 /* FOOTER */
 footer {
@@ -404,14 +428,17 @@ footer {
       <div class="proy-card">
         <h3>Herbarium</h3>
         <p>Ciclo de eventos propio en los espacios más icónicos de Buenos Aires: The Bow, El Muelle de Costanera, La Biblioteca, Palacio Tango y Club Aráoz, entre otros.</p>
+        <a class="proy-link" href="https://www.instagram.com/hrb.experience/" target="_blank" rel="noopener">@hrb.experience ↗</a>
       </div>
       <div class="proy-card">
         <h3>TRAMA Electronic Music Lab</h3>
         <p>Academia de música electrónica que dirige, formando a nuevos DJs y productores desde la técnica y la escucha.</p>
+        <a class="proy-link" href="https://www.instagram.com/trama.ecl/" target="_blank" rel="noopener">@trama.ecl ↗</a>
       </div>
       <div class="proy-card">
         <h3>fANi Crew</h3>
         <p>Agencia y colectivo desde el que impulsa y proyecta a los talentos emergentes formados en su academia.</p>
+        <a class="proy-link" href="https://www.instagram.com/fani.crew/" target="_blank" rel="noopener">@fani.crew ↗</a>
       </div>
     </div>
   </div>
@@ -459,11 +486,44 @@ footer {
           </div>
         </a>
       </div>
-      <div class="youtube-embed reveal">
-        <iframe src="https://www.youtube.com/embed/MHV8Ee9G8zc"
-          title="FANI — Canal Oficial"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
+      <div class="yt-player reveal">
+        <div class="yt-title">Video sets</div>
+        <div class="youtube-embed">
+          <iframe id="yt-frame" src="https://www.youtube.com/embed/MHV8Ee9G8zc"
+            title="Flash Day × La Mala Tattoo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="yt-list"><div class="yt-scroll">
+          <a class="yt-item on" href="https://youtu.be/MHV8Ee9G8zc" data-id="MHV8Ee9G8zc" data-title="Flash Day × La Mala Tattoo" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/MHV8Ee9G8zc/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Flash Day × La Mala Tattoo</strong><em>DJ Set · Canal FANI</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/ODjD1JbEj1w" data-id="ODjD1JbEj1w" data-title="Sintonía Emergente" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/ODjD1JbEj1w/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Sintonía Emergente</strong><em>Domo Inmersivo · Pasaje Dardo Rocha</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/kj3ESy-IkZM" data-id="kj3ESy-IkZM" data-title="HRB" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/kj3ESy-IkZM/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>HRB</strong><em>La Biblioteca BA</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/5kghOcmTJn4" data-id="5kghOcmTJn4" data-title="Fani b2b Fede Llobet" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/5kghOcmTJn4/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Fani b2b Fede Llobet</strong><em>Opening · Club The Bow</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/NBcNrmqdFcQ" data-id="NBcNrmqdFcQ" data-title="SEA rec" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/NBcNrmqdFcQ/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>SEA rec</strong><em>One-shot</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/5frEeX9SxQ8" data-id="5frEeX9SxQ8" data-title="Colonia Radio" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/5frEeX9SxQ8/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Colonia Radio</strong><em>30 de Mayo de 2026</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/n9Fvd35aGyc" data-id="n9Fvd35aGyc" data-title="Coffee &amp; Beat #003" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/n9Fvd35aGyc/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Coffee &amp; Beat #003</strong><em>EUREKA! Academy</em></span>
+          </a>
+        </div></div>
       </div>
     </div>
   </div>
@@ -491,6 +551,7 @@ footer {
     <div class="contact-booking">
       <p>Booking</p>
       <a href="https://www.instagram.com/divergente.agency/" target="_blank" rel="noopener">Divergente Agency</a>
+      <a class="booking-mail" href="mailto:Divergenteagency.booking@gmail.com">Divergenteagency.booking@gmail.com</a>
     </div>
   </div>
 </section>
@@ -582,6 +643,19 @@ revealEls.forEach(el => revealObs.observe(el));
     swap(slot);
     if (!still) setInterval(() => swap(slot), 6000);
   }, i * 2000));
+})();
+
+// VIDEO SETS: click en la lista cambia el video del reproductor
+(function(){
+  const frame = document.getElementById('yt-frame');
+  const items = document.querySelectorAll('.yt-item');
+  items.forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    items.forEach(x => x.classList.remove('on'));
+    a.classList.add('on');
+    frame.title = a.dataset.title;
+    frame.src = 'https://www.youtube.com/embed/' + a.dataset.id + '?autoplay=1';
+  }));
 })();
 </script>
 </body>
