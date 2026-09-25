@@ -299,16 +299,17 @@ nav.solid { background: rgba(9,13,28,.97); }
 .contact-link:hover { border-color: var(--accent); color: var(--accent); }
 .contact-booking { margin-top: 60px; padding-top: 48px; border-top: 1px solid var(--line); }
 .contact-booking p { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); margin-bottom: 12px; }
-.contact-booking a {
-  font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .2em;
-  color: var(--accent); text-decoration: none; transition: color .2s;
+.contact-booking h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .2em; font-weight: 400; color: var(--accent); margin-bottom: 28px; }
+.booking-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.booking-card {
+  display: flex; flex-direction: column; gap: 8px; padding: 22px 32px; min-width: 280px;
+  border: 1px solid var(--line2); text-decoration: none; transition: all .25s;
 }
-.contact-booking a:hover { color: var(--accent2); }
-.contact-booking a.booking-mail {
-  display: block; margin-top: 14px; font-family: 'DM Sans', sans-serif; font-size: .9rem;
-  letter-spacing: .05em; color: var(--mute); word-break: break-all;
-}
-.contact-booking a.booking-mail:hover { color: var(--accent); }
+.booking-card:hover { border-color: var(--accent); background: rgba(184,142,224,.06); }
+.booking-card span { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
+.booking-card strong { font-size: .95rem; font-weight: 400; letter-spacing: .04em; color: var(--fg); word-break: break-all; }
+.booking-card:hover strong { color: var(--accent2); }
+@media (max-width: 640px) { .booking-card { width: 100%; min-width: 0; } }
 
 /* FOOTER */
 footer {
@@ -523,6 +524,14 @@ footer {
             <img src="https://i.ytimg.com/vi/n9Fvd35aGyc/mqdefault.jpg" alt="" loading="lazy">
             <span><strong>Coffee &amp; Beat #003</strong><em>EUREKA! Academy</em></span>
           </a>
+          <a class="yt-item" href="https://youtu.be/xwEQoVW7FmA" data-id="xwEQoVW7FmA" data-title="Gregoria Session #64" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/xwEQoVW7FmA/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Gregoria Session #64</strong><em>Indie Dance</em></span>
+          </a>
+          <a class="yt-item" href="https://youtu.be/xPy6G5L6Gd8" data-id="xPy6G5L6Gd8" data-title="Bailen Room 159" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/xPy6G5L6Gd8/mqdefault.jpg" alt="" loading="lazy">
+            <span><strong>Bailen Room 159</strong><em>5 Dic 2024</em></span>
+          </a>
         </div></div>
       </div>
     </div>
@@ -550,8 +559,17 @@ footer {
     </div>
     <div class="contact-booking">
       <p>Booking</p>
-      <a href="https://www.instagram.com/divergente.agency/" target="_blank" rel="noopener">Divergente Agency</a>
-      <a class="booking-mail" href="mailto:Divergenteagency.booking@gmail.com">Divergenteagency.booking@gmail.com</a>
+      <h3>Divergente Agency</h3>
+      <div class="booking-cards">
+        <a class="booking-card" href="mailto:Divergenteagency.booking@gmail.com">
+          <span>Mail</span>
+          <strong>Divergenteagency.booking@gmail.com</strong>
+        </a>
+        <a class="booking-card" href="https://www.instagram.com/divergente.agency/" target="_blank" rel="noopener">
+          <span>Instagram</span>
+          <strong>@divergente.agency ↗</strong>
+        </a>
+      </div>
     </div>
   </div>
 </section>
