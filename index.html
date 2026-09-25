@@ -80,7 +80,7 @@ nav.solid { background: rgba(9,13,28,.97); }
 .hero-bg::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(9,13,28,.92) 0%, rgba(9,13,28,.3) 50%, rgba(9,13,28,.05) 100%);
+  background: linear-gradient(to top, rgba(9,13,28,.92) 0%, rgba(9,13,28,.55) 50%, rgba(9,13,28,.1) 100%);
 }
 @keyframes hZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
 .hero-content {
@@ -547,7 +547,7 @@ revealEls.forEach(el => revealObs.observe(el));
 })();
 // Galería: 3 slots que se van reemplazando con fundido cruzado
 (function() {
-  const pool  = [{"src":"assets/g01.jpg","pos":"50% 35%"},{"src":"assets/g02.jpg","pos":"50% 30%"},{"src":"assets/g03.jpg","pos":"50% 60%"},{"src":"assets/g04.jpg","pos":"50% 50%"},{"src":"assets/g05.jpg","pos":"50% 50%"},{"src":"assets/g06.jpg","pos":"50% 30%"},{"src":"assets/g07.jpg","pos":"50% 35%"},{"src":"assets/g08.jpg","pos":"78% 50%"},{"src":"assets/g09.jpg","pos":"50% 45%"},{"src":"assets/g10.jpg","pos":"50% 40%"},{"src":"assets/g11.jpg","pos":"50% 40%"},{"src":"assets/g12.jpg","pos":"50% 35%"}];
+  const pool  = [{"src":"assets/g01.jpg","pos":"50% 40%"},{"src":"assets/g02.jpg","pos":"50% 35%"},{"src":"assets/g03.jpg","pos":"50% 40%"},{"src":"assets/g04.jpg","pos":"50% 30%"},{"src":"assets/g05.jpg","pos":"50% 60%"},{"src":"assets/g06.jpg","pos":"50% 50%"},{"src":"assets/g07.jpg","pos":"50% 50%"},{"src":"assets/g08.jpg","pos":"50% 30%"},{"src":"assets/g09.jpg","pos":"50% 35%"},{"src":"assets/g10.jpg","pos":"78% 50%"},{"src":"assets/g11.jpg","pos":"50% 45%"},{"src":"assets/g12.jpg","pos":"50% 40%"},{"src":"assets/g13.jpg","pos":"50% 40%"},{"src":"assets/g14.jpg","pos":"50% 35%"}];
   const slots = Array.from(document.querySelectorAll('.gal-slot'));
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const showing = new Set();
