@@ -311,6 +311,26 @@ nav.solid { background: rgba(9,13,28,.97); }
 .booking-card:hover strong { color: var(--accent2); }
 @media (max-width: 640px) { .booking-card { width: 100%; min-width: 0; } }
 
+/* MODAL BOOKING */
+.modal {
+  position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
+  padding: 20px; background: rgba(5,7,16,.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity .2s;
+}
+.modal[hidden] { display: none; }
+.modal.open { opacity: 1; }
+.modal-box {
+  position: relative; width: 100%; max-width: 440px; padding: 44px 32px 32px; text-align: center;
+  background: var(--bg2); border: 1px solid var(--line2); transform: translateY(8px); transition: transform .2s;
+}
+.modal.open .modal-box { transform: none; }
+.modal-close { position: absolute; top: 8px; right: 14px; background: none; border: 0; cursor: pointer; font-size: 1.9rem; line-height: 1; color: var(--mute); }
+.modal-close:hover { color: var(--accent); }
+.modal-label { font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+.modal-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .2em; font-weight: 400; color: var(--accent); margin-bottom: 24px; }
+.modal-box .booking-cards { flex-direction: column; gap: 14px; }
+.modal-box .booking-card { width: 100%; min-width: 0; }
+
 /* FOOTER */
 footer {
   border-top: 1px solid var(--line); padding: 32px 40px;
@@ -336,8 +356,26 @@ footer {
     <li><a href="#rider">Rider</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a class="nav-booking" href="https://www.instagram.com/divergente.agency/" target="_blank" rel="noopener">Booking</a>
+  <a class="nav-booking" id="booking-open" href="#contacto">Booking</a>
 </nav>
+
+<div class="modal" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="bm-title" hidden>
+  <div class="modal-box">
+    <button class="modal-close" type="button" aria-label="Cerrar">×</button>
+    <div class="modal-label">Booking</div>
+    <h3 id="bm-title">Divergente Agency</h3>
+    <div class="booking-cards">
+        <a class="booking-card" href="mailto:Divergenteagency.booking@gmail.com">
+          <span>Mail</span>
+          <strong>Divergenteagency.booking@gmail.com</strong>
+        </a>
+        <a class="booking-card" href="https://www.instagram.com/divergente.agency/" target="_blank" rel="noopener">
+          <span>Instagram</span>
+          <strong>@divergente.agency ↗</strong>
+        </a>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -674,6 +712,30 @@ revealEls.forEach(el => revealObs.observe(el));
     frame.title = a.dataset.title;
     frame.src = 'https://www.youtube.com/embed/' + a.dataset.id + '?autoplay=1';
   }));
+})();
+
+// BOOKING: el boton abre un pop up para elegir mail o Instagram
+(function(){
+  const modal = document.getElementById('booking-modal');
+  let opener = null, timer;
+  function open(){
+    clearTimeout(timer);
+    opener = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => { modal.classList.add('open'); modal.querySelector('.booking-card').focus(); });
+  }
+  function close(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    timer = setTimeout(() => { modal.hidden = true; }, 200);
+    if (opener) opener.focus();
+  }
+  document.getElementById('booking-open').addEventListener('click', e => { e.preventDefault(); open(); });
+  modal.addEventListener('click', e => {
+    if (e.target === modal || e.target.closest('.modal-close') || e.target.closest('.booking-card')) close();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
 })();
 </script>
 </body>
