@@ -547,15 +547,16 @@ revealEls.forEach(el => revealObs.observe(el));
 })();
 // Galería: 3 slots que se van reemplazando con fundido cruzado
 (function() {
-  const pool  = [{"src":"assets/g01.jpg","pos":"50% 40%"},{"src":"assets/g02.jpg","pos":"50% 35%"},{"src":"assets/g03.jpg","pos":"50% 40%"},{"src":"assets/g04.jpg","pos":"50% 30%"},{"src":"assets/g05.jpg","pos":"50% 60%"},{"src":"assets/g06.jpg","pos":"50% 50%"},{"src":"assets/g07.jpg","pos":"50% 50%"},{"src":"assets/g08.jpg","pos":"50% 30%"},{"src":"assets/g09.jpg","pos":"50% 35%"},{"src":"assets/g10.jpg","pos":"78% 50%"},{"src":"assets/g11.jpg","pos":"50% 45%"},{"src":"assets/g12.jpg","pos":"50% 40%"},{"src":"assets/g13.jpg","pos":"50% 40%"},{"src":"assets/g14.jpg","pos":"50% 35%"}];
+  const pool  = [{"src":"assets/g01.jpg","pos":"50% 35%"},{"src":"assets/g02.jpg","pos":"50% 35%"},{"src":"assets/g03.jpg","pos":"55% 40%"},{"src":"assets/g04.jpg","pos":"50% 35%"},{"src":"assets/g05.jpg","pos":"50% 35%"},{"src":"assets/g06.jpg","pos":"50% 35%"},{"src":"assets/g07.jpg","pos":"57% 40%"},{"src":"assets/g08.jpg","pos":"50% 35%"},{"src":"assets/g09.jpg","pos":"50% 35%"},{"src":"assets/g10.jpg","pos":"50% 35%"},{"src":"assets/g11.jpg","pos":"52% 40%"},{"src":"assets/g12.jpg","pos":"50% 35%"},{"src":"assets/g13.jpg","pos":"50% 35%"},{"src":"assets/g14.jpg","pos":"50% 35%"},{"src":"assets/g15.jpg","pos":"50% 35%"},{"src":"assets/g16.jpg","pos":"50% 35%"},{"src":"assets/g17.jpg","pos":"50% 35%"},{"src":"assets/g18.jpg","pos":"50% 35%"},{"src":"assets/g19.jpg","pos":"50% 35%"},{"src":"assets/g20.jpg","pos":"50% 35%"}];
   const slots = Array.from(document.querySelectorAll('.gal-slot'));
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const showing = new Set();
+  const order = pool.map((_, i) => i).sort(() => Math.random() - 0.5);
   let next = 0;
 
   function take() {
     let n;
-    do { n = next++ % pool.length; } while (showing.has(n));
+    do { n = order[next++ % order.length]; } while (showing.has(n));
     showing.add(n);
     return n;
   }
