@@ -211,6 +211,29 @@ nav.solid { background: rgba(9,13,28,.97); }
 .proy-card p { font-size: .82rem; line-height: 1.7; color: var(--mute); }
 @media (max-width: 768px) { .proy-grid { grid-template-columns: 1fr; } }
 
+/* NEXT GIGS */
+#gigs { border-bottom: 1px solid var(--line); }
+#gigs[hidden], #gigs [hidden] { display: none; }
+.gig-list { display: flex; flex-direction: column; gap: 40px; }
+.gig-month { display: flex; flex-direction: column; gap: 10px; }
+.gig-month h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: .2em; font-weight: 400; color: var(--accent); }
+.gig {
+  display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 20px;
+  padding: 16px 24px; border: 1px solid var(--line2); color: var(--fg); text-decoration: none; transition: all .25s;
+}
+a.gig:hover { border-color: var(--accent); background: rgba(184,142,224,.06); }
+.gig-day { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; letter-spacing: .04em; color: var(--accent); }
+.gig-info { min-width: 0; }
+.gig-info strong { display: block; font-size: .95rem; letter-spacing: .04em; font-weight: 500; margin-bottom: 3px; }
+.gig-info em { font-style: normal; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.gig-link { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); transition: color .2s; }
+a.gig:hover .gig-link { color: var(--accent2); }
+@media (max-width: 640px) {
+  .gig { grid-template-columns: 48px 1fr; gap: 6px 14px; padding: 14px 16px; }
+  .gig-day { font-size: 2.1rem; }
+  .gig-link { grid-column: 2; }
+}
+
 /* MÚSICA */
 #musica { border-bottom: 1px solid var(--line); }
 .musica-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -491,6 +514,72 @@ footer {
   </div>
 </section>
 
+<!-- NEXT GIGS (las fechas pasadas se ocultan solas, ver script al final) -->
+<section id="gigs">
+  <div class="sec">
+    <div class="sec-label">Agenda</div>
+    <h2 class="sec-title reveal">Next Gigs</h2>
+    <div class="gig-list reveal">
+      <div class="gig-month">
+        <h3>Septiembre</h3>
+        <a class="gig" data-date="2026-09-26" href="https://www.instagram.com/p/DdXVvAZmlHv/?img_index=1" target="_blank" rel="noopener">
+          <span class="gig-day">26</span>
+          <span class="gig-info"><strong>Timming Club</strong><em>Lobos · Prov. de Buenos Aires</em></span>
+          <span class="gig-link">Instagram ↗</span>
+        </a>
+      </div>
+      <div class="gig-month">
+        <h3>Octubre</h3>
+        <div class="gig" data-date="2026-10-01">
+          <span class="gig-day">01</span>
+          <span class="gig-info"><strong>Presentación Roster × Divergente Agency</strong><em>CABA</em></span>
+        </div>
+        <a class="gig" data-date="2026-10-03" href="https://centralticket.net/event/Viktoria-ExtendedSet" target="_blank" rel="noopener">
+          <span class="gig-day">03</span>
+          <span class="gig-info"><strong>Delimic — Viktoria Extended Set</strong><em>Comunidad Ferroviaria · La Plata</em></span>
+          <span class="gig-link">Tickets ↗</span>
+        </a>
+        <div class="gig" data-date="2026-10-17">
+          <span class="gig-day">17</span>
+          <span class="gig-info"><strong>Pop Up Fani Crew × Lebrel</strong><em>Lebrel La Rambla · La Plata</em></span>
+        </div>
+        <a class="gig" data-date="2026-10-17" href="https://www.instagram.com/p/Ddch6sLx0nV/" target="_blank" rel="noopener">
+          <span class="gig-day">17</span>
+          <span class="gig-info"><strong>Somnus — AS25K 7 horas</strong><em>Galpón de las Artes · La Plata</em></span>
+          <span class="gig-link">Instagram ↗</span>
+        </a>
+        <div class="gig" data-date="2026-10-18">
+          <span class="gig-day">18</span>
+          <span class="gig-info"><strong>Ahora Entiendo Todo × Vermu Interferencia</strong><em>La Plata</em></span>
+        </div>
+      </div>
+      <div class="gig-month">
+        <h3>Noviembre</h3>
+        <a class="gig" data-date="2026-11-14" href="https://www.instagram.com/fani.crew/" target="_blank" rel="noopener">
+          <span class="gig-day">14</span>
+          <span class="gig-info"><strong>Fani Crew Sessions VII × Veredita</strong><em>La Plata</em></span>
+          <span class="gig-link">Instagram ↗</span>
+        </a>
+      </div>
+      <div class="gig-month">
+        <h3>Diciembre</h3>
+        <div class="gig" data-date="2026-12-05">
+          <span class="gig-day">05</span>
+          <span class="gig-info"><strong>Crobar Club w/ Andre VII</strong><em>CABA</em></span>
+        </div>
+        <div class="gig" data-date="2026-12-12">
+          <span class="gig-day">12</span>
+          <span class="gig-info"><strong>Deriva Festival × Fani Crew × Herbarium</strong><em>La Plata</em></span>
+        </div>
+        <div class="gig" data-date="2026-12-31">
+          <span class="gig-day">31</span>
+          <span class="gig-info"><strong>Año Nuevo × Ciudad de Gatos</strong><em>La Plata</em></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MÚSICA -->
 <section id="musica">
   <div class="sec">
@@ -720,6 +809,15 @@ revealEls.forEach(el => revealObs.observe(el));
     frame.title = a.dataset.title;
     frame.src = 'https://www.youtube.com/embed/' + a.dataset.id + '?autoplay=1';
   }));
+})();
+
+// NEXT GIGS: oculta las fechas que ya pasaron, el mes vacio y la seccion si no queda ninguna
+(function(){
+  const d = new Date();
+  const today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  document.querySelectorAll('.gig').forEach(g => { g.hidden = g.dataset.date < today; });
+  document.querySelectorAll('.gig-month').forEach(m => { m.hidden = !m.querySelector('.gig:not([hidden])'); });
+  document.getElementById('gigs').hidden = !document.querySelector('.gig:not([hidden])');
 })();
 
 // BOOKING: el boton abre un pop up para elegir mail o Instagram
